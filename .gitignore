@@ -1,0 +1,8 @@
+
+.DS_Store
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/timer.iml
+node_modules/
+

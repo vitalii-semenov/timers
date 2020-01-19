@@ -1,0 +1,113 @@
+@media (min-width: 320px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (min-width: 560px) {
+  .container {
+    margin: 0 auto;
+    width: 560px;
+    text-align: center;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.timersListContainer {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #80808052;
+    padding: 10px 0;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 182, 193, 0.13);
+      color: #528002;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid #80808052;
+    }
+
+    span {
+      margin-right: 20px;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+}
+
+.addImg {
+  cursor: pointer;
+  z-index: 1000;
+  top: 2px;
+  right: 2px;
+  background: green;
+  padding: 3px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.createInputContainer {
+  position: relative;
+  margin-bottom: 30px;
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    height: 32px;
+    width: 28px;
+    border: 1px solid black;
+    border-bottom-left-radius: 28px;
+    border-top-left-radius: 28px;
+    border-right: none;
+  }
+  &:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: '';
+    height: 32px;
+    width: 28px;
+    border: 1px solid black;
+    border-bottom-right-radius: 28px;
+    border-top-right-radius: 28px;
+    border-left: none;
+  }
+  input {
+    width: 90%;
+    font-size: 26px;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
