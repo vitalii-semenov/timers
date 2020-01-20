@@ -20,12 +20,14 @@ const Home = () => {
   useEffect(() => {
     const diff = getTimeFromExit();
     const timersFromLocalStorage = JSON.parse(localStorage.getItem(TIMERS));
-    timersFromLocalStorage && timersFromLocalStorage.forEach(el => el.timer = moment(el.timer).add(diff));
+    timersFromLocalStorage && timersFromLocalStorage.forEach(el => {
+      !el.pause ? el.timer = moment(el.timer).add(diff) : el.timer = moment(el.timer);
+    });
     setState(prevState => ({...prevState, timers: timersFromLocalStorage || []}))
     const interval = () => setState(prevState => ({...prevState, isChanged: !prevState.isChanged}));
     setInterval(interval, 1000);
     return () => clearInterval(interval)
-    }, [])
+    }, []);
 
   useEffect(() => {
     let newT = [...state.timers];
@@ -41,10 +43,10 @@ const Home = () => {
       localStorage.setItem(EXIT_TIME, JSON.stringify(moment().format()))
       setState(prevState => ({...prevState, timers: newT}))
     }
-  }, [state.isChanged])
+  }, [state.isChanged]);
 
   const parseDaysTo = (date) => {
-    return `${date.days() * 24 + date.hours()}:${date.minutes()}:${date.seconds()}`
+    return `${date.days() * 24 + date.hours()}:${date.format('mm')}:${date.format('ss')}`
   };
 
   const getTimeFromExit = () => {
@@ -56,7 +58,7 @@ const Home = () => {
 
   const addTimer = () => {
     let newTimers = [...state.timers];
-    newTimers.unshift({name: state.name, timer: moment().startOf('day'), pause: false});
+    newTimers.unshift({name: state.name, timer: moment().startOf('week'), pause: false});
     setState(prevState => ({...prevState, timers: newTimers, name: '', isChanged: !prevState.isChanged}))
   };
 
@@ -68,6 +70,7 @@ const Home = () => {
 
   const setDelete = (id) => {
     const newTimers = [...state.timers].filter((el, index) => index !== id);
+    if (!newTimers.length) localStorage.setItem(TIMERS, JSON.stringify(newTimers));
     setState(prevState => ({...prevState, timers: newTimers}))
   };
 
